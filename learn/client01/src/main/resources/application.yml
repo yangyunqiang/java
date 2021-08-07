@@ -1,0 +1,52 @@
+
+server:
+  port: 9081
+spring:
+  application:
+    name: client01
+  zipkin:
+    base-url: http://192.168.1.7:9411
+    enabled: true
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+
+#ribbon:
+#  eureka:
+#    enabled: false
+#
+#sample-s123:
+#    ribbon:
+#      listOfServers: 127.0.0.1:8081,127.0.0.1:8082
+logging:
+  level:
+    com.example.client01.client: debug
+
+feign:
+  client:
+    config:
+      # feign全局日志级别
+      default:
+        loggerLevel: full
+
+
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.6:8761/eureka/
+
+com:
+  zipkin:
+    serviceName: client01
+    url: http://192.168.1.7:9411
+    connectTimeout: 6000
+    readTimeout: 6000
+    flushInterval: 1
+    compressionEnabled: true
+

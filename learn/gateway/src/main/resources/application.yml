@@ -1,0 +1,13 @@
+# 应用名称
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+
+        - id: gw1
+          uri: https://www.baidu.com
+
+
+

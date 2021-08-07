@@ -1,0 +1,146 @@
+version: "3"
+services:
+  center:
+    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+    container_name: "docker-center"
+    working_dir: /app
+    volumes:
+      - "./config:/app/config"
+    entrypoint:
+      - java
+      - -Dloader.path=lib
+      - -DENV_ID=docker
+      - -jar
+      - center-server.jar
+    networks:
+      - etc-net
+    ports:
+      - "8000:8000"
+    hostname: center
+    environment:
+      - spring.profiles.active=docker
+  gateway:
+    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+    container_name: "docker-gateway"
+    working_dir: /app
+    volumes:
+      - "./config:/app/config"
+    entrypoint:
+      - java
+      - -Dloader.path=lib
+      - -DENV_ID=docker
+      - -jar
+      - gateway-server.jar
+    networks:
+      - etc-net
+    ports:
+      - "8010:8010"
+    hostname: gateway
+    depends_on:
+      - center
+    environment:
+      - spring.profiles.active=docker
+  demo:
+    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+    container_name: "docker-demo"
+    working_dir: /app
+    volumes:
+      - "./config:/app/config"
+    entrypoint:
+      - java
+      - -Dloader.path=lib
+      - -DENV_ID=docker
+      - -jar
+      - demo-server.jar
+    networks:
+      - etc-net
+    expose:
+      - "8200"
+    hostname: demo
+    depends_on:
+      - center
+      - gateway
+    environment:
+      - spring.profiles.active=docker
+  user:
+    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+    container_name: "docker-user"
+    working_dir: /app
+    volumes:
+      - "./config:/app/config"
+    entrypoint:
+      - java
+      - -Dloader.path=lib
+      - -DENV_ID=docker
+      - -jar
+      - user-server.jar
+    networks:
+      - etc-net
+    expose:
+      - "8100"
+    hostname: user
+    depends_on:
+      - center
+      - gateway
+    environment:
+      - spring.profiles.active=docker
+#  center1:
+#    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+#    container_name: "docker-center1"
+#    working_dir: /app
+#    volumes:
+#      - "./config:/app/config"
+#    entrypoint:
+#      - java
+#      - -Dloader.path=lib
+#      - -DENV_ID=docker
+#      - -jar
+#      - center-server.jar
+#    networks:
+#      - etc-net
+#    ports:
+#      - "8001:8001"
+#    hostname: center1
+#    environment:
+#      - spring.profiles.active=center1
+#  center2:
+#    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+#    container_name: "docker-center2"
+#    working_dir: /app
+#    volumes:
+#      - "./config:/app/config"
+#    entrypoint:
+#      - java
+#      - -Dloader.path=lib
+#      - -DENV_ID=docker
+#      - -jar
+#      - center-server.jar
+#    networks:
+#      - etc-net
+#    ports:
+#      - "8002:8002"
+#    hostname: center2
+#    environment:
+#      - spring.profiles.active=center2
+#  center3:
+#    image: com.jiuyv.etc/etc-service:1.0.1-SNAPSHOT
+#    container_name: "docker-center3"
+#    working_dir: /app
+#    volumes:
+#      - "./config:/app/config"
+#    entrypoint:
+#      - java
+#      - -Dloader.path=lib
+#      - -DENV_ID=docker
+#      - -jar
+#      - center-server.jar
+#    networks:
+#      - etc-net
+#    ports:
+#      - "8003:8003"
+#    hostname: center3
+#    environment:
+#      - spring.profiles.active=center3
+networks:
+  etc-net:
+    driver: bridge

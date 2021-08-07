@@ -1,0 +1,9 @@
+server:
+  port: 2002
+
+
+yyq:
+  gateway:
+    route:
+    - name : user
+      url: http://127.0.0.1:9081/

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+ 
+<generatorConfiguration>
+    <!--配置要链接的数据库的数据源-->
+    <classPathEntry location="C:\Users\YYQ\.m2\repository\com\oracle\ojdbc6\11.2.0.3\ojdbc6-11.2.0.3.jar"/>
+    <!---Mybatis上下文-->
+    <context id="MySqlContext" targetRuntime="MyBatis3">
+        <!--配置数据库的链接信息-->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@//192.168.99.100:1521/xe" userId="yyq"
+                        password="yyq"/>
+        <!--数据库BigDecimals字段在java中定义-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--实体类生成信息-->
+        <javaModelGenerator targetPackage="com.jy.mybatis" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--mybatis 的xml文件地址-->
+        <sqlMapGenerator targetPackage="com.jy.mybatis" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--mybatis的mapper接口-->
+        <javaClientGenerator targetPackage="com.jy.mybatis" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--要生成的表结构-->
+        <table tableName="userinfo" 
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+ 
+    </context>
+ 
+</generatorConfiguration>

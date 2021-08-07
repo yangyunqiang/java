@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: erueka-server
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  server:
+    # 自我保护机制，默认true。打开后，心跳失败在15分钟内低于85%(renewalPercentThreshold)的服务，也不进行剔除。
+    # 关闭后，主页提示：RENEWALS ARE LESSER THAN THE THRESHOLD. THE SELF PRESERVATION MODE IS TURNED OFF.
+    # THIS MAY NOT PROTECT INSTANCE EXPIRY IN CASE OF NETWORK/OTHER PROBLEMS.
+    enableSelfPreservation: true # 本地调试时可fasle关闭。但生产建议打开，可防止因网络不稳定等原因导致误剔除服务。
+    renewalPercentThreshold: 0.49
+
+  client:
+    register-with-eureka: false     #false表示不向注册中心注册自己。
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/,http://${eureka.instance.hostname}:8762/eureka/

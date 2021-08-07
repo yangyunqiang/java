@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tkmybatisgenerator.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="tkmybatisgenerator.entity.Student">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="STUID" jdbcType="NUMERIC" property="stuid" />
+    <result column="STUNAME" jdbcType="VARCHAR" property="stuname" />
+    <result column="GENDER" jdbcType="VARCHAR" property="gender" />
+    <result column="AGE" jdbcType="NUMERIC" property="age" />
+    <result column="JOINDATE" jdbcType="TIMESTAMP" property="joindate" />
+    <result column="CLASSID" jdbcType="NUMERIC" property="classid" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+</mapper>
