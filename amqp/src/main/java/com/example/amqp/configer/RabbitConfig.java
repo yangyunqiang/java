@@ -28,11 +28,11 @@ public class RabbitConfig {
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange("demo1");
+        return new DirectExchange("exchange1");
     }
 
     @Bean Binding bind001() {
-        return BindingBuilder.bind(helloQueue1()).to(directExchange()).with("hello1");
+        return BindingBuilder.bind(helloQueue()).to(directExchange()).with("hello");
     }
 
 

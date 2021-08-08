@@ -15,7 +15,11 @@ public class Sender {
     public void send() {
         String context = "hello " + LocalDateTime.now();
         System.out.println(context);
-        this.rabbitTemplate.convertAndSend("demo1","hello1", context);
+
+        for (int i = 0; i < 100 ; i++) {
+            this.rabbitTemplate.convertAndSend("exchange1","hello", context);
+        }
+
     }
 
 }

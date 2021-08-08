@@ -22,9 +22,6 @@ class AmqpApplicationTests {
     @Test
     void contextLoads() {
 
-
-
-
     }
 
 }
