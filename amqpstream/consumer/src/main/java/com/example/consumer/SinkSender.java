@@ -1,0 +1,14 @@
+package com.example.consumer;
+
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.Output;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.messaging.MessageChannel;
+
+public interface SinkSender {
+
+
+    @Output(Sink.INPUT)
+    MessageChannel output();
+}
