@@ -3,12 +3,28 @@ spring:
   application:
     name: consumer
   rabbitmq:
-    host: localhost
+    host: 168.10.15.165
     port: 5672
-    username: guest
-    password: guest
+    username: etc
+    password: etc
     listener:
       simple:
         prefetch: 5
+    bindings:
+      output:
+        destination: demo1
+        group: demohello1
+      rabbit:
+        bindings:
+          output:
+            producer:
+              routing-key-expression: '''addProduct.*'''
+    virtual-host: etc_gantry
+
+logging:
+  level:
+    org.springframework.cloud.stream: debug
+    org.springframework.amqp: debug
+
 
 
